@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,18 +8,21 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>The Datebase</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
 <body>
     <header class="navbar-fixed" >
         <nav>
-            <div class="nav-wrapper red-4">
-                <ul>
-                    <li><a href="/" class="left brand-logo">&nbsp;&nbsp;the datebase</a></li>
-                </ul>
+            <div class="nav-wrapper white">
+                <a href="/" class="left brand-logo" style="margin: 0 10px"><img height="30vh" src="../static/images/Datebase Logo.png" alt="datebase logo"></a> 
                 <ul class="right">
-                    <p>test</p>
+                   <li> <a class="red-text text-darken 4" href="{% url 'matches_create %'}">Add a Match</a></li>
+                   <li> <a class="red-text text-darken 4" href="{% url 'rdvs_index %}">Rendez-Vous</a></li>
+                   <li> <a class="red-text text-darken 4" href="{% url 'logout' %}">Log Out</a></li>
+                   <li> <a class="red-text text-darken 4" href="{% url 'profile' %}"><i class="large material-icons">account_circle</i></a></li>
                 </ul>
             </div>
         </nav>
@@ -27,11 +31,13 @@
         {% block content %}
         {% endblock %}
     </main>
-  	 <footer class="page-footer green darken-4">
-        <ul class="left">
-            <li><a href="{% url 'about' %}">About</a></li>
-        </ul>
-        <div class="right">All Rights Reserved, &copy; 2019 the datebase &nbsp;</div>
+  	 <footer class="page-footer red darken-4">
+        <div class="footer-copyright">
+            <div class="left">
+                <a class="white-text" href="{% url 'about' %}">About</a>
+            </div>
+            All Rights Reserved, &copy; 2019 the datebase &nbsp;
+        </div>
     </footer>
 </body>
 </html>
