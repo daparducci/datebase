@@ -8,4 +8,6 @@ urlpatterns = [
     path('matches/', views.matches_index, name='matches_index'),
     path('matches/create', views.MatchCreate.as_view(), name="matches_create"),
     path('matches/<int:match_id>', views.MatchDetail.as_view(), name="match_detail"),
+    path('profile/<int:pk>', views.UserDetail.as_view(), name="profile"),
+    path('accounts/signup', views.signup, name="signup"),
 ]
