@@ -1,17 +1,30 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>The Datebase</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
 <body>
-    <form method="post" action="{% url 'login' %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" class="btn" value="login">
-        <input type="hidden" name="next" value="{{ next }}">
-      </form>
+    <main>
+        <img height="100vh" src="../static/images/Datebase Logo.png" alt="datebase logo">
+        <p>helping singles tackle the messy world of dating</p>
+        <br>
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" class="btn" value="login">
+            <input type="hidden" name="next" value="{{ next }}">
+        </form>
+    </main>
+
 </body>
 </html>
