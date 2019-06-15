@@ -1,0 +1,42 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+main {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+img {
+    height: 12vmin;
+    margin: 1vh;
+}
+
+p {
+    font-weight: 600;
+    font-size: 3vmin;
+    margin: 0;
+}
+
+.btn {
+    border: 1px solid black;
+    background-color: transparent;
+    color: black;
+    margin: 2vh;
+    width: 25vw;
+    height: 10vh;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 3vmin;
+}
+
+.btn:hover{
+    background-color: #ff3b2d;
+    color: white;
+}
