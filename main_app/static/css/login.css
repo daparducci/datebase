@@ -24,13 +24,16 @@ p {
     margin: 0;
 }
 
+a {
+    vertical-align: middle;
+}
+
 .btn {
     border: 1px solid black;
     background-color: transparent;
     color: black;
     margin: 2vh;
     width: 25vw;
-    height: 10vh;
     border-radius: 5px;
     font-weight: 600;
     font-size: 3vmin;
