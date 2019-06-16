@@ -2,7 +2,10 @@
 {% block content %}
 
 <h1>RDV List</h1>
+{% for rdv in rdv_list  %}
 
-{% endfor %}
-
+{{rdv.match.name}}
+{{rdv.date}}
+<a href=" {% url 'rdv_detail' rdv.id %}">...</a>
+ {% endfor %}
 {% endblock %}

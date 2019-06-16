@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Match
+from .models import Match, Rdv
 from django.views.generic.edit import CreateView, DeleteView
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.models import User
@@ -37,7 +37,7 @@ def matches_index(request):
 
 class MatchCreate(CreateView):
   model = Match
-  fields = ['name', 'email', 'phone', 'age', 'location', 'meet', 'interests', 'zodiac', 'see_again', 'ghost']
+  fields = ['name', 'email', 'phone', 'age', 'location', 'meet', 'interests', 'zodiac']
   success_url = '/matches/'
 
   # def form_valid(self, form):
@@ -46,8 +46,26 @@ class MatchCreate(CreateView):
   #   # Let the CreateView do its job as usual
   #   return super().form_valid(form)
 
+
 class MatchDetail(DetailView):
   model = Match
+
+class RdvCreate(CreateView):
+  model = Rdv
+  fields = ['match', 'date', 'what', 'where']
+  success_url = '/rdvs/'
+
+  # def form_valid(self, form):
+  # # Assign the logged in user
+  #   form.instance.user = self.request.user
+  #   # Let the CreateView do its job as usual
+  #   return super().form_valid(form)
+
+class RdvList(ListView):
+  model = Rdv
+
+class RdvDetail(DetailView):
+  model = Rdv
 
 class UserDetail(DetailView):
   model = User
