@@ -17,11 +17,11 @@
     <header class="navbar-fixed" >
         <nav>
             <div class="nav-wrapper white">
-                <a href="/" class="left brand-logo" style="margin: 0 10px"><img height="30vh" src="../static/images/Datebase Logo.png" alt="datebase logo"></a> 
+                <a href="{% url 'matches_index' %}" class="left brand-logo" style="margin: 0 10px"><img height="30vh" src="../static/images/Datebase Logo.png" alt="datebase logo"></a> 
                 {% if user.is_authenticated %}
                 <ul class="right">
                    <li> <a class="red-text text-darken 4" href="{% url 'matches_create' %}">Add a Match</a></li>
-                   <li> <a class="red-text text-darken 4" href="">Rendez-Vous</a></li>
+                   <li> <a class="red-text text-darken 4" href="{% url 'rdvs_index' %}">Rendez-Vous</a></li>
                    <li> <a class="red-text text-darken 4" href="{% url 'logout' %}">Log Out</a></li>
                    <li> <a class="red-text text-darken 4" href="{% url 'profile' user.id %}"><i class="large material-icons">account_circle</i></a></li>
                 </ul>

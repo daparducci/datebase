@@ -37,8 +37,25 @@ class Match(models.Model):
         ),
         blank = True
     )
-    see_again = models.BooleanField(blank = True)
-    ghost = models.BooleanField(blank = True)
+    see_again = models.BooleanField(null = True)
+    ghost = models.BooleanField(null = True)
 
     def __str__(self):
         return self.name
+
+class Rdv(models.Model):
+    match = models.ForeignKey(Match, on_delete=models.CASCADE)
+    date = models.DateField()
+    what = models.TextField(blank=True)
+    where = models.TextField(blank=True)
+    # rating = models.IntegerField(
+        # choices=(
+        #     (1, 1), (2, 2), (3, 3), (4, 4), (5, 5)
+        # ),
+        # blank = True
+    # )
+    cancel = models.BooleanField(null=True)
+    notes = models.TextField(null=True)
+
+    def __str__(self):
+        return self.what 
