@@ -50,6 +50,11 @@ class MatchCreate(CreateView):
 class MatchDetail(DetailView):
   model = Match
 
+class MatchDelete(DeleteView):
+  model = Match
+  print('working')
+  success_url = '/matches/'
+
 class RdvCreate(CreateView):
   model = Rdv
   fields = ['match', 'date', 'what', 'where']
@@ -65,6 +70,9 @@ class RdvList(ListView):
   model = Rdv
 
 class RdvDetail(DetailView):
+  model = Rdv
+
+class RdvDelete(DeleteView):
   model = Rdv
 
 class UserDetail(DetailView):
