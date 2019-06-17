@@ -53,7 +53,7 @@ def add_profile_photo(request, profile_id):
     try:
       s3.upload_fileobj(photo_file, BUCKET, key)
       url = f"{S3_BASE_URL}{BUCKET}/{key}"
-      photo = User_photo(url=url, profile_id=profile_id)
+      photo = User_photo(url=url, user_id=profile_id)
       photo.save()
     except:
       print('An error occurred uploading file to S3')
@@ -75,11 +75,11 @@ class MatchCreate(CreateView):
   fields = ['name', 'email', 'phone', 'age', 'location', 'meet', 'interests', 'zodiac']
   success_url = '/matches/'
 
-  # def form_valid(self, form):
-  # # Assign the logged in user
-  #   form.instance.user = self.request.user
-  #   # Let the CreateView do its job as usual
-  #   return super().form_valid(form)
+  def form_valid(self, form):
+  # Assign the logged in user
+    form.instance.user = self.request.user
+    # Let the CreateView do its job as usual
+    return super().form_valid(form)
 
 
 class MatchDetail(DetailView):
