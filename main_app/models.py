@@ -12,6 +12,9 @@ from phone_field import PhoneField
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
+    def get_absolute_url(self):
+        return reverse('profile', kwargs={'pk': self.id})
+
 class Match(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)

@@ -18,4 +18,6 @@ urlpatterns = [
     path('rdvs/create', views.RdvCreate.as_view(), name="rdvs_create"),
     path('rdvs/<int:pk>', views.RdvDetail.as_view(), name="rdv_detail"),
     path('matches/<int:match_id>/add_match_photo/', views.add_match_photo, name="add_match_photo"),
+    path('profile/<int:profile_id>/add_profile_photo/', views.add_profile_photo, name="add_profile_photo"),
+
 ]
