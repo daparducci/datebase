@@ -108,6 +108,7 @@ class RdvDetail(DetailView):
 
 class RdvDelete(DeleteView):
   model = Rdv
+  success_url= '/rdvs/'
 
 class UserDetail(DetailView):
   model = User
