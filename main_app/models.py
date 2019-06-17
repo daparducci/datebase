@@ -9,8 +9,11 @@ from phone_field import PhoneField
 
 # Create your models here. Don't forget to register them in admin.py (admin.site.register(modelname))
 
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
 class Match(models.Model):
-    # user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     email = models.CharField(
         max_length=100,
@@ -59,3 +62,17 @@ class Rdv(models.Model):
 
     def __str__(self):
         return self.what 
+
+class Match_photo(models.Model):
+    url = models.CharField(max_length=200)
+    match = models.ForeignKey(Match, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Photo for match_id:  {self.match_id} @{self.url}"
+
+class User_photo(models.Model):
+    url = models.CharField(max_length=200)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Photo for match_id:  {self.user_id} @{self.url}"
