@@ -44,6 +44,21 @@ def add_match_photo(request, match_id):
       print('An error occurred uploading file to S3')
   return redirect('match_detail', pk=match_id)
 
+def add_profile_photo(request, profile_id):
+  photo_file = request.FILES.get('photo-file', None)
+  if photo_file:
+    session = boto3.Session(profile_name="datebase")
+    s3 = session.client('s3')
+    key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+    try:
+      s3.upload_fileobj(photo_file, BUCKET, key)
+      url = f"{S3_BASE_URL}{BUCKET}/{key}"
+      photo = User_photo(url=url, profile_id=profile_id)
+      photo.save()
+    except:
+      print('An error occurred uploading file to S3')
+  return redirect('profile', pk=profile_id)
+
 
 def home(request):
     return render(request, 'home.html')
