@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
-from datetime import date
+from datetime import date, time
+import datetime
 # Import the User
 from django.contrib.auth.models import User
 from phonenumber_field.modelfields import PhoneNumberField
@@ -55,6 +56,7 @@ class Match(models.Model):
 class Rdv(models.Model):
     match = models.ForeignKey(Match, on_delete=models.CASCADE)
     date = models.DateField()
+    rdv_time = models.CharField(max_length=10)
     what = models.TextField(blank=True)
     where = models.TextField(blank=True)
     # rating = models.IntegerField(
