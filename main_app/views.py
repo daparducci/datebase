@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Match, Rdv
+from .models import Match, Rdv, Match_photo, User_photo
 from django.views.generic.edit import CreateView, DeleteView
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.models import User
@@ -9,6 +9,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 import uuid
 import boto3
+
+S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
+BUCKET = 'datebase'
 
 # Create your views here.
 def signup(request):
@@ -24,6 +27,23 @@ def signup(request):
   form = UserCreationForm()
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
+
+def add_match_photo(request, match_id):
+  print(match_id)
+  photo_file = request.FILES.get('photo-file', None)
+  if photo_file:
+    session = boto3.Session(profile_name="datebase")
+    s3 = session.client('s3')
+    key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+    try:
+      s3.upload_fileobj(photo_file, BUCKET, key)
+      url = f"{S3_BASE_URL}{BUCKET}/{key}"
+      photo = Match_photo(url=url, match_id=match_id)
+      photo.save()
+    except:
+      print('An error occurred uploading file to S3')
+  return redirect('match_detail', pk=match_id)
+
 
 def home(request):
     return render(request, 'home.html')
@@ -52,7 +72,6 @@ class MatchDetail(DetailView):
 
 class MatchDelete(DeleteView):
   model = Match
-  print('working')
   success_url = '/matches/'
 
 class RdvCreate(CreateView):
