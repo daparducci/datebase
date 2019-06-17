@@ -5,7 +5,7 @@
     <div class="col s12 m12 l4">
         <div class="card-image center-align">
         {% for photo in match.match_photo_set.all %}
-        <img class="responsive-img card-panel" src="{{photo.url}}">
+        <img class=" responsive-img card-panel" src="{{photo.url}}">
         {% empty %}
         <i class="material-icons" style="font-size: 12rem" >account_circle</i>
         {% endfor %}

@@ -5,10 +5,12 @@
 <div class="row">
     {% for match in matches %}
     <div class="col s6 m4 l3">
-        <div class="card">
-            <div class="card-image center-align">
+        <div class="card center-align">
+            {% for photo in match.match_photo_set.all %}
+                <img class="responsive-img"  src="{{photo.url}}">
+            {% empty %}
                 <i class="material-icons" style="font-size: 12rem" >account_circle</i>
-            </div>
+            {% endfor %}
             <div class="card-content center-align">
                 <a class="btn-floating halfway-fab waves-effect waves-light red" href="{% url 'match_detail' match.id %}"><i class="material-icons">more_horiz</i></a>
                 <span class="card-title">{{ match.name }}</span>
