@@ -17,4 +17,5 @@ urlpatterns = [
     path('rdvs/', views.RdvList.as_view(), name='rdvs_index'),
     path('rdvs/create', views.RdvCreate.as_view(), name="rdvs_create"),
     path('rdvs/<int:pk>', views.RdvDetail.as_view(), name="rdv_detail"),
+    path('matches/<int:match_id>/add_match_photo/', views.add_match_photo, name="add_match_photo"),
 ]
