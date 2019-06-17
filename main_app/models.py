@@ -43,6 +43,9 @@ class Match(models.Model):
     see_again = models.BooleanField(null = True)
     ghost = models.BooleanField(null = True)
 
+    def get_absolute_url(self):
+        return reverse('detail', kwargs={'match_id': self.id})
+
     def __str__(self):
         return self.name
 
