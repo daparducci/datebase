@@ -2,20 +2,22 @@
 {% block content %}
 
 <h1>My Matches</h1>
-
-{% for match in matches %}
 <div class="row">
-    <div class="col s12 m6">
+    {% for match in matches %}
+    <div class="col s6 m4 l3">
         <div class="card">
-            <div class="card-image">
-            <img src="">
-            <span class="card-title">{{ match.name }}</span>
-            <a class="btn-floating halfway-fab waves-effect waves-light red" href="{% url 'match_detail' match.id %}"><i class="material-icons">add</i></a>
+            <div class="card-image center-align">
+                <i class="material-icons" style="font-size: 12rem" >account_circle</i>
+            </div>
+            <div class="card-content center-align">
+                <a class="btn-floating halfway-fab waves-effect waves-light red" href="{% url 'match_detail' match.id %}"><i class="material-icons">more_horiz</i></a>
+                <span class="card-title">{{ match.name }}</span>
             </div>
         </div>
     </div>
+    {% endfor %}
 </div>
-{% endfor %}
+
 
 {% endblock %}
 

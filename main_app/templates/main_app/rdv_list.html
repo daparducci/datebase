@@ -1,11 +1,63 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>RDV List</h1>
-{% for rdv in rdv_list  %}
+<br><br><br>
 
-{{rdv.match.name}}
-{{rdv.date}}
-<a href=" {% url 'rdv_detail' rdv.id %}">...</a>
- {% endfor %}
+<div class="row">
+    <div class="col s12 m6 l6">
+        <div class="card">
+            <div class="card-content center-align">
+                <span class="card-title red-text text-darken 4">PAST RENDEZ-VOUS</span>
+                <table class="highlight">
+                    <thead>
+                        <tr>
+                            <th>Match</th>
+                            <th>Date</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for rdv in rdv_list  %}
+                        <tr>
+                            <td>{{rdv.match.name}}</td>
+                            <td>{{rdv.date}}</td>
+                            <td><a class="btn-floating btn-small waves-effect waves-light red" href="{% url 'rdv_detail' rdv.id %}"> <i class="material-icons">more_horiz</i></a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col s12 m6 l6">
+        <div class="card">
+            <div class="card-content center-align">
+                <span class="card-title red-text text-darken 4">UPCOMING RENDEZ-VOUS</span>
+                <table class="highlight">
+                    <thead>
+                        <tr>
+                            <th>Match</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for rdv in rdv_list  %}
+                        <tr>
+                            <td>{{rdv.match.name}}</td>
+                            <td>{{rdv.date}}</td>
+                            <td>{{rdv.time}}</td>
+                            <td><a class="btn-floating btn-small waves-effect waves-light red" href="{% url 'rdv_detail' rdv.id %}"> <i class="material-icons">more_horiz</i></a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <br>
+                <a class="waves-effect btn-flat red white-text" href="{% url 'rdvs_create' %}"> Add a new Rendez-Vous</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
