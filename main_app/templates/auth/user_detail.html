@@ -2,6 +2,11 @@
 {% block content %}
 
 <h1 class="center-align">Profile Page</h1>
+
+<div class="center-align">
+    <a class="btn" href="{% url 'profile_create'%}">Create Profile</a>
+</div>
+
 <div class="row">
     <div class="col s4 m4 l4">
             <div class="card-image center-align">
@@ -15,8 +20,9 @@
                 {% csrf_token%}
                 <input type="file" name="photo-file">
                 <br><br>
-                <input type="submit" class="btn red" value="Upload Photo">
+                <input type="submit" class="waves-effect btn-flat red white-text" value="Upload Photo">
             </form>
+            <a class="waves-effect btn-flat red white-text" href="">Edit Profile</a>
     </div>
     <div class="col s8 m8 l8">
         <table class="striped">
@@ -28,32 +34,37 @@
                 </tr>
                 <tr>
                     <th>First Name</th>
-                    <td>first name</td>
+                    <td>{{ profile.first_name }}</td>
                     <td><a class="btn-floating btn-small waves-effect waves-light red" href=""> <i class="material-icons">edit</i></a></td>
                 </tr>
                 <tr>
                     <th>Last Name</th>
-                    <td>last name</td>
+                    <td>{{ profile.last_name }}</td>
                     <td><a class="btn-floating btn-small waves-effect waves-light red" href=""> <i class="material-icons">edit</i></a></td>
                 </tr>
                 <tr>
-                    <th>User Email</th>
-                    <td>user email</td>
+                    <th>Age</th>
+                    <td>{{ profile.age }}</td>
+                    <td><a class="btn-floating btn-small waves-effect waves-light red" href=""> <i class="material-icons">edit</i></a></td>
+                </tr>
+                <tr>
+                    <th>Gender</th>
+                    <td>{{ profile.gender }}</td>
+                    <td><a class="btn-floating btn-small waves-effect waves-light red" href=""> <i class="material-icons">edit</i></a></td>
+                </tr>
+                <tr>
+                    <th>Zodiac</th>
+                    <td>{{ profile.first_name }}</td>
                     <td><a class="btn-floating btn-small waves-effect waves-light red" href=""> <i class="material-icons">edit</i></a></td>
                 </tr>
                 <tr>
                     <th>Current Dating Apps</th>
-                    <td>Current Dating Apps</td>
+                    <td>{{ profile.apps_used }}</td>
                     <td><a class="btn-floating btn-small waves-effect waves-light red" href=""> <i class="material-icons">edit</i></a></td>
                 </tr>
                 <tr>
-                    <th>Looking for</th>
-                    <td>Looking for</td>
-                    <td><a class="btn-floating btn-small waves-effect waves-light red" href=""> <i class="material-icons">edit</i></a></td>
-                </tr>
-                <tr>
-                    <th>Zodiac Sign</th>
-                    <td>Zodiac Sign</td>
+                    <th>Relationship Goal</th>
+                    <td>{{ profile.relationship_goal}}</td>
                     <td><a class="btn-floating btn-small waves-effect waves-light red" href=""> <i class="material-icons">edit</i></a></td>
                 </tr>
             </tbody>

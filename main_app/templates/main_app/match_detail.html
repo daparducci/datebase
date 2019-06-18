@@ -51,13 +51,15 @@
                 <table class="striped">
                     <tbody>
                         {% for rdv in match.rdv_set.all  %}
-                            {% if request.user.id == rdv.match.user.id %} 
+                        {% if not rdv.past_date %}
+                        {% if request.user.id == rdv.match.user.id %} 
                             <tr>
                                 <td>{{rdv.match.name}}</td>
                                 <td>{{rdv.date}}</td>
                                 <td><a class="btn-floating btn-small waves-effect waves-light red" href="{% url 'rdv_detail' rdv.id %}"> <i class="material-icons">more_horiz</i></a></td>
                             </tr>
-                            {% endif %}
+                        {% endif %}
+                        {% endif %}
                         {% endfor %}
                         <a class="waves-effect btn-flat red white-text" href="{% url 'rdvs_create' %}"> Add a new Rendez-Vous</a>
                     </tbody>
@@ -105,8 +107,17 @@
                 <table class="striped">
                     <tbody>
                         <tr>
-                            <td>upcoming rdz date and time</td>
-                            <td><a class="btn-floating btn-small waves-effect waves-light red" href=""> <i class="material-icons">more_horiz</i></a></td>
+                            {% for rdv in match.rdv_set.all  %}
+                            {% if rdv.past_date %}
+                            {% if request.user.id == rdv.match.user.id %} 
+                                <tr>
+                                    <td>{{rdv.match.name}}</td>
+                                    <td>{{rdv.date}}</td>
+                                    <td><a class="btn-floating btn-small waves-effect waves-light red" href="{% url 'rdv_detail' rdv.id %}"> <i class="material-icons">more_horiz</i></a></td>
+                                </tr>
+                            {% endif %}
+                            {% endif %}
+                            {% endfor %}
                         </tr>
                     </tbody>
                 </table>
