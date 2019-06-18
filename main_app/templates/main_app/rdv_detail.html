@@ -6,7 +6,7 @@
     <div class="col s4 m4 l4">
             <div class="card-image center-align">
                 {% for photo in rdv.match.match_photo_set.all %}
-                    <img class=" responsive-img card-panel" src="{{photo.url}}">
+                    <a href="{% url 'match_detail' match.id %}"><img class=" responsive-img card-panel" src="{{photo.url}}"></a>
                 {% empty %}
                     <i class="material-icons" style="font-size: 12rem" >account_circle</i>
                 {% endfor %}
