@@ -107,7 +107,7 @@ class Match(models.Model):
 class Rdv(models.Model):
     match = models.ForeignKey(Match, on_delete=models.CASCADE)
     date = models.DateField()
-    rdv_time = models.TimeField(blank=True)
+    rdv_time = models.TimeField(blank=True, null=True)
     what = models.TextField(blank=True)
     where = models.TextField(blank=True)
     rating = models.CharField(
@@ -121,7 +121,7 @@ class Rdv(models.Model):
     notes = models.TextField(null=True)
 
     def __str__(self):
-        return self.match
+        return self.match.name
     
     def get_absolute_url(self):
         return reverse('rdv_detail', kwargs={'pk': self.id})

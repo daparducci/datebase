@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from django import forms
+from django.db import models
 from .models import Match, Rdv, Match_photo, User_photo, Profile
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic import ListView, DetailView
@@ -96,12 +98,13 @@ class MatchDelete(LoginRequiredMixin, DeleteView):
 
 class MatchUpdate(LoginRequiredMixin, UpdateView):
   model = Match
-  fields = ['name', 'email', 'phone', 'age', 'location', 'meet', 'interests', 'zodiac']
+  fields = ['name', 'email', 'phone_number', 'age', 'location', 'meet', 'interests', 'zodiac']
 
 class RdvCreate(LoginRequiredMixin, CreateView):
   model = Rdv
-  fields = ['match', 'date', 'what', 'where']
+  fields = ['match', 'date', 'rdv_time', 'what', 'where']
   success_url = '/rdvs/'
+  rdv_time = forms.TimeField(input_formats=['%I:%M %p'],      widget=forms.TimeInput)
 
   # def form_valid(self, form):
   # # Assign the logged in user
@@ -117,7 +120,7 @@ class RdvDetail(LoginRequiredMixin, DetailView):
 
 class RdvUpdate(LoginRequiredMixin, UpdateView):
   model = Rdv
-  fields = ['match', 'date', 'what', 'where']
+  fields = ['match', 'date', 'time', 'what', 'where', 'rating']
 
 class RdvDelete(LoginRequiredMixin, DeleteView):
   model = Rdv

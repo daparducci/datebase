@@ -125,3 +125,5 @@ STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/matches/'
 
 LOGOUT_REDIRECT_URL = '/'
+
+TIME_INPUT_FORMATS = ['%I:%M %p',]

@@ -27,6 +27,16 @@ var dateEl = document.getElementById('id_date');
     autoClose: true
   });
 
+var timeEl = document.getElementById('id_rdv_time');
+  M.Timepicker.init(timeEl, {
+    twelveHour: true,
+    
+  });
+
+  timeEl.onchange = function() {
+    console.log(this);
+  }
+
     var selectEl = document.getElementById('id_match');
     M.FormSelect.init(selectEl);
 </script>
