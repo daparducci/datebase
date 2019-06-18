@@ -17,13 +17,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                    {% for rdv in rdv_list  %}
-                        {% if request.user.id == rdv.match.user.id %} 
-                        <tr>
-                            <td>{{rdv.match.name}}</td>
-                            <td>{{rdv.date}}</td>
-                            <td><a class="btn-floating btn-small waves-effect waves-light red" href="{% url 'rdv_detail' rdv.id %}"> <i class="material-icons">more_horiz</i></a></td>
-                        </tr>
+                        {% for rdv in rdv_list %}
+                            {% if rdv.past_date %}
+                                {% if request.user.id == rdv.match.user.id %} 
+                                    <tr>
+                                        <td>{{rdv.match.name}}</td>
+                                        <td>{{rdv.date}}</td>
+                                        <td><a class="btn-floating btn-small waves-effect waves-light red" href="{% url 'rdv_detail' rdv.id %}"> <i class="material-icons">more_horiz</i></a></td>
+                                    </tr>
+                            {% endif %}
                         {% endif %}
                     {% endfor %}
                     </tbody>
@@ -46,13 +48,15 @@
                     </thead>
                     <tbody>
                     {% for rdv in rdv_list %}
-                        {% if request.user.id == rdv.match.user.id %} 
+                        {% if not rdv.past_date %}
+                            {% if request.user.id == rdv.match.user.id %} 
                         <tr>
                             <td>{{rdv.match.name}}</td>
                             <td>{{rdv.date}}</td>
                             <td>{{rdv.time}}</td>
                             <td><a class="btn-floating btn-small waves-effect waves-light red" href="{% url 'rdv_detail' rdv.id %}"> <i class="material-icons">more_horiz</i></a></td>
                         </tr>
+                            {% endif %}
                         {% endif %}
                     {% endfor %}
                     </tbody>

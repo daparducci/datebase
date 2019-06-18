@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Match, Rdv, Match_photo, User_photo
+from django.urls import reverse
+from .models import Match, Rdv, Match_photo, User_photo, Profile
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.models import User
@@ -76,7 +77,7 @@ def matches_index(request):
 
 class MatchCreate(LoginRequiredMixin, CreateView):
   model = Match
-  fields = ['name', 'email', 'phone', 'age', 'location', 'meet', 'interests', 'zodiac']
+  fields = ['name', 'email', 'phone_number', 'age', 'location', 'meet', 'interests', 'zodiac']
   success_url = '/matches/'
 
   def form_valid(self, form):
@@ -124,4 +125,20 @@ class RdvDelete(LoginRequiredMixin, DeleteView):
 
 class UserDetail(LoginRequiredMixin, DetailView):
   model = User
-  
+
+class ProfileCreate (LoginRequiredMixin, CreateView):
+  model = Profile
+  fields = ['first_name', 'last_name', 'age', 'gender', 'zodiac', 'apps_used', 'relationship_goal']
+  # success_url = f'/profile/{request.user.id}'
+
+  def form_valid(self, form):
+  # Assign the logged in user
+    form.instance.user = self.request.user
+    # Let the CreateView do its job as usual
+    return super().form_valid(form)
+
+  def get_success_url(self):
+      # return reverse('profile', kwargs={'pk': request.user.id})
+      return f'/profile/{request.user.id}'
+  # def get_success_url(self):
+  #   return (f'profile/{request.user.id}')
