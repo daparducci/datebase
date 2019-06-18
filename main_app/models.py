@@ -126,6 +126,9 @@ class Rdv(models.Model):
     def get_absolute_url(self):
         return reverse('rdv_detail', kwargs={'pk': self.id})
 
+    def past_date(self):
+        return date.today() > self.date
+
 class Match_photo(models.Model):
     url = models.CharField(max_length=200)
     match = models.ForeignKey(Match, on_delete=models.CASCADE)
