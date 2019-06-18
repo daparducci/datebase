@@ -3,6 +3,7 @@
 
 <h1>My Matches</h1>
 <div class="row">
+    {% if matches %}
     {% for match in matches %}
     <div class="col s6 m4 l3">
         <div class="card center-align">
@@ -18,6 +19,7 @@
         </div>
     </div>
     {% endfor %}
+    {% endif %}
 </div>
 
 

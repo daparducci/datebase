@@ -12,11 +12,13 @@ urlpatterns = [
     path('matches/', views.matches_index, name='matches_index'),
     path('matches/create', views.MatchCreate.as_view(), name="matches_create"),
     path('matches/<int:pk>/', views.MatchDetail.as_view(), name="match_detail"),
+    path('matches/<int:pk>/update/', views.MatchUpdate.as_view(), name="match_update"),
     path('matches/<int:pk>/delete/', views.MatchDelete.as_view(), name="match_delete"),
     # RDVS
     path('rdvs/', views.RdvList.as_view(), name='rdvs_index'),
     path('rdvs/create', views.RdvCreate.as_view(), name="rdvs_create"),
     path('rdvs/<int:pk>', views.RdvDetail.as_view(), name="rdv_detail"),
+    path('rdvs/<int:pk>/update/', views.RdvUpdate.as_view(), name="rdv_update"),
     path('rdvs/<int:pk>/delete/', views.RdvDelete.as_view(), name="rdv_delete"),
 
     path('matches/<int:match_id>/add_match_photo/', views.add_match_photo, name="add_match_photo"),
