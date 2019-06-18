@@ -70,6 +70,9 @@ class Rdv(models.Model):
 
     def __str__(self):
         return self.what 
+    
+    def get_absolute_url(self):
+        return reverse('rdv_detail', kwargs={'pk': self.id})
 
 class Match_photo(models.Model):
     url = models.CharField(max_length=200)
