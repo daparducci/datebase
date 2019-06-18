@@ -107,7 +107,7 @@ class Match(models.Model):
 class Rdv(models.Model):
     match = models.ForeignKey(Match, on_delete=models.CASCADE)
     date = models.DateField()
-    time = models.TimeField(blank=True)
+    rdv_time = models.TimeField(blank=True)
     what = models.TextField(blank=True)
     where = models.TextField(blank=True)
     rating = models.CharField(
