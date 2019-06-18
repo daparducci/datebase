@@ -12,6 +12,56 @@ from phone_field import PhoneField
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=100, blank=True)
+    last_name = models.CharField(max_length=100, blank=True)
+    age = models.IntegerField(null=True)
+    gender = models.CharField(
+        max_length=100,
+        choices=(
+            ('M', 'Male'),
+            ('F', 'Female'),
+            ('N', 'Non-Binary'),
+        ),
+        blank = True
+    )
+    zodiac = models.CharField(
+        max_length=100,
+        choices=(
+            ('Aries', 'Aries'), ('Taurus', 'Taurus'), ('Gemini', 'Gemini'),
+            ('Cancer', 'Cancer'), ('Leo', 'Leo'), ('Virgo', 'Virgo'), ('Libra', 'Libra'),
+            ('Scorpio', 'Scorpio'), ('Sagittarius', 'Sagittarius'), ('Capricorn', 'Capricorn'),
+            ('Aquarius', 'Aquarius'), ('Pisces','Pisces')
+        ),
+        blank = True
+    )
+    apps_used = models.CharField(
+        max_length=100,
+        choices=(
+            ('Bumble', 'Bumble'),
+            ('CoffeeMeetsBagel', 'CoffeeMeetsBagel'),
+            ('Grindr', 'Grindr' ),
+            ('Match', 'Match'),
+            ('OkCupid', 'OkCupid'),
+            ('POF', 'POF'),
+            ('Hinge', 'Hinge'),
+            ('Tinder', 'Tinder'),
+
+        ),
+        blank = True
+    )
+    relationship_goal = models.CharField(
+        max_length=100,
+        choices=(
+            ('Relationship', 'Relationship'),
+            ('Something Casual', 'Something Casual'),
+            ('Not Sure', 'Not Sure'),
+            ('Marriage', 'Marriage'),
+        ),
+        blank=True
+    )
+    created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+
+
 
     def get_absolute_url(self):
         return reverse('profile', kwargs={'pk': self.id})
@@ -23,17 +73,18 @@ class Match(models.Model):
         max_length=100,
         blank = True
     )
-    phone = models.CharField(max_length=100, blank = True)
+    phone_number = PhoneNumberField(null=True, blank=True)
     age = models.IntegerField(null= True)
     location = models.TextField(blank = True)
     meet = models.TextField()
     interests = models.TextField(blank = True)
-    # attraction = models.IntegerField(
-    #     # choices=(
-    #     #     (1, 1), (2, 2), (3, 3), (4, 4), (5, 5)
-    #     # ),
-    #     blank = True
-    # )
+    attraction = models.CharField(
+        max_length=100,
+        choices=(
+            ('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5')
+        ),
+        blank = True
+    )
     zodiac = models.CharField(
         max_length=100,
         choices=(
