@@ -74,7 +74,7 @@ class Match(models.Model):
         blank = True
     )
     phone_number = PhoneNumberField(null=True, blank=True)
-    age = models.IntegerField(null= True)
+    age = models.IntegerField(null= True, blank=True)
     location = models.TextField(blank = True)
     meet = models.TextField()
     interests = models.TextField(blank = True)
@@ -110,12 +110,13 @@ class Rdv(models.Model):
     rdv_time = models.CharField(max_length=10)
     what = models.TextField(blank=True)
     where = models.TextField(blank=True)
-    # rating = models.IntegerField(
-        # choices=(
-        #     (1, 1), (2, 2), (3, 3), (4, 4), (5, 5)
-        # ),
-        # blank = True
-    # )
+    rating = models.CharField(
+        max_length=100,
+        choices=(
+            ('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5')
+        ),
+        blank = True
+    )
     cancel = models.BooleanField(null=True)
     notes = models.TextField(null=True)
 
