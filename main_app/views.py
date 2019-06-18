@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Match, Rdv, Match_photo, User_photo
-from django.views.generic.edit import CreateView, DeleteView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.models import User
 from django.contrib.auth import login
@@ -28,6 +28,7 @@ def signup(request):
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
 
+@login_required
 def add_match_photo(request, match_id):
   print(match_id)
   photo_file = request.FILES.get('photo-file', None)
@@ -44,6 +45,7 @@ def add_match_photo(request, match_id):
       print('An error occurred uploading file to S3')
   return redirect('match_detail', pk=match_id)
 
+@login_required
 def add_profile_photo(request, profile_id):
   photo_file = request.FILES.get('photo-file', None)
   if photo_file:
@@ -63,14 +65,16 @@ def add_profile_photo(request, profile_id):
 def home(request):
     return render(request, 'home.html')
 
+
 def about(request):
   return render(request, 'about.html')
 
+@login_required
 def matches_index(request):
-  matches = Match.objects.all()
+  matches = Match.objects.filter(user=request.user)
   return render(request, 'matches/index.html', {'matches': matches})
 
-class MatchCreate(CreateView):
+class MatchCreate(LoginRequiredMixin, CreateView):
   model = Match
   fields = ['name', 'email', 'phone', 'age', 'location', 'meet', 'interests', 'zodiac']
   success_url = '/matches/'
@@ -82,34 +86,42 @@ class MatchCreate(CreateView):
     return super().form_valid(form)
 
 
-class MatchDetail(DetailView):
+class MatchDetail(LoginRequiredMixin, DetailView):
   model = Match
 
-class MatchDelete(DeleteView):
+class MatchDelete(LoginRequiredMixin, DeleteView):
   model = Match
   success_url = '/matches/'
 
-class RdvCreate(CreateView):
+class MatchUpdate(LoginRequiredMixin, UpdateView):
+  model = Match
+  fields = ['name', 'email', 'phone', 'age', 'location', 'meet', 'interests', 'zodiac']
+
+class RdvCreate(LoginRequiredMixin, CreateView):
   model = Rdv
   fields = ['match', 'date', 'what', 'where']
   success_url = '/rdvs/'
 
   # def form_valid(self, form):
   # # Assign the logged in user
-  #   form.instance.user = self.request.user
+  #   form.instance.match = self.match.user
   #   # Let the CreateView do its job as usual
   #   return super().form_valid(form)
 
-class RdvList(ListView):
+class RdvList(LoginRequiredMixin, ListView):
   model = Rdv
 
-class RdvDetail(DetailView):
+class RdvDetail(LoginRequiredMixin, DetailView):
   model = Rdv
 
-class RdvDelete(DeleteView):
+class RdvUpdate(LoginRequiredMixin, UpdateView):
+  model = Rdv
+  fields = ['match', 'date', 'what', 'where']
+
+class RdvDelete(LoginRequiredMixin, DeleteView):
   model = Rdv
   success_url= '/rdvs/'
 
-class UserDetail(DetailView):
+class UserDetail(LoginRequiredMixin, DetailView):
   model = User
   
