@@ -130,8 +130,18 @@
                                 {% csrf_token %}
                                 {{ notes_form.as_p }}
                                 <input type="submit" class="btn" value="Add Note">
+                                
                         </form>
                     </tr>
+                    {% for note in match.match_notes_set.all %}
+                    <tr>
+                      <td>{{note.created}}</td>
+                      <td>{{note.notes}}</td>
+
+                    </tr>
+                    {% empty %}
+                    <h1>Test</h1>
+                  {% endfor %}
                 </tbody>
             </table>
         </div>

@@ -101,9 +101,9 @@ def add_note(request, pk):
   form = NotesForm(request.POST)
   if form.is_valid():
     new_note = form.save(commit=False)
-    new_note.pk = pk
+    new_note.match_id = pk
     new_note.save()
-  return render(request, 'matches/match_detail.html', pk=pk)
+  return redirect('match_detail', pk=pk)
 
 class MatchDetail(LoginRequiredMixin, DetailView):
   model = Match
