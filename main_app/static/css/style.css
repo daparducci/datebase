@@ -10,6 +10,15 @@ main.container {
     flex: 1 0 auto;
 }
 
+.profile {
+    display: inline-block;
+    height: 100vh;
+}
+
+.profile-pic {
+    margin-top: 10px;
+}
+
 footer {
     padding-top: 0;
     text-align: right;
@@ -32,4 +41,8 @@ span {
     width: 15vw;
     font-weight: 600;
     font-size: 3vmin;
+}
+
+p {
+    font-size: calc(13px + 0.5vw);
 }

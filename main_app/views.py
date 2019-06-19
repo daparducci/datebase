@@ -100,11 +100,19 @@ class MatchUpdate(LoginRequiredMixin, UpdateView):
   model = Match
   fields = ['name', 'email', 'phone_number', 'age', 'location', 'meet', 'interests', 'zodiac']
 
+# TODO
 class RdvCreate(LoginRequiredMixin, CreateView):
   model = Rdv
   fields = ['match', 'date', 'rdv_time', 'what', 'where']
   success_url = '/rdvs/'
   rdv_time = forms.TimeField(input_formats=['%I:%M %p'],      widget=forms.TimeInput)
+
+  def get_user(self):
+    return self.request.user
+  
+  # match = Match.objects.filter(user=self.request.user)
+
+  # match = Match.objects.exclude(id__in = get_user.matches.all().values_list('id'))
 
   # def form_valid(self, form):
   # # Assign the logged in user
@@ -126,8 +134,11 @@ class RdvDelete(LoginRequiredMixin, DeleteView):
   model = Rdv
   success_url= '/rdvs/'
 
-class UserDetail(LoginRequiredMixin, DetailView):
-  model = User
+@login_required
+def user_detail(request, pk):
+  profile = Profile.objects.filter(user=request.user)
+  return render(request, 'auth/user_detail.html', {'profile': profile}, pk)
+
 
 class ProfileCreate (LoginRequiredMixin, CreateView):
   model = Profile
@@ -142,6 +153,10 @@ class ProfileCreate (LoginRequiredMixin, CreateView):
 
   def get_success_url(self):
       # return reverse('profile', kwargs={'pk': request.user.id})
-      return f'/profile/{request.user.id}'
+      return f'/profile/{self.request.user.id}'
   # def get_success_url(self):
   #   return (f'profile/{request.user.id}')
+
+class ProfileUpdate(LoginRequiredMixin, UpdateView):
+  model = Profile
+  fields = ['first_name', 'last_name', 'age', 'gender', 'zodiac', 'apps_used', 'relationship_goal']
