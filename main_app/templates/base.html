@@ -35,7 +35,11 @@
         </nav>
         {% if user.is_authenticated %}
         <ul class="sidenav" id="mobile-links">
-            <li> <a class="red-text text-darken 4" href="{% url 'profile' user.id %}"><i class="large material-icons">account_circle</i></a></li>
+            {% for photo in user.user_photo_set.all %}
+                <li> <a class="profile red-text text-darken 4" href="{% url 'profile' user.id %}"><img class="profile-pic circle" height="40vh" width="40vw" src="{{photo.url}}"></a></li>
+                {% empty %}
+                <li> <a class="red-text text-darken 4" href="{% url 'profile' user.id %}"><i class="large material-icons">account_circle</i></a></li>
+                {% endfor %}
             <li> <a class="red-text text-darken 4" href="{% url 'matches_create' %}">Add a Match</a></li>
             <li> <a class="red-text text-darken 4" href="{% url 'rdvs_index' %}">Rendez-Vous</a></li>
             <li> <a class="red-text text-darken 4" href="{% url 'logout' %}">Log Out</a></li>
