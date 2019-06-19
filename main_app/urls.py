@@ -13,8 +13,9 @@ urlpatterns = [
     # MATCHES
     path('matches/', views.matches_index, name='matches_index'),
     path('matches/create', views.MatchCreate.as_view(), name="matches_create"),
-    path('matches/<int:pk>/', views.MatchDetail.as_view(), name="match_detail"),
+    path('matches/<int:pk>/', views.match_detail, name="match_detail"),
     path('matches/<int:pk>/update/', views.MatchUpdate.as_view(), name="match_update"),
+    path('matches/<int:pk>/add_note/', views.add_note, name='add_note'),
     path('matches/<int:pk>/delete/', views.MatchDelete.as_view(), name="match_delete"),
     # RDVS
     path('rdvs/', views.RdvList.as_view(), name='rdvs_index'),
