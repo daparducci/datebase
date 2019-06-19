@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Rdv, Match
+from .models import Rdv, Match, Match_notes
 from django import forms
 
 class RdvForm(ModelForm):
@@ -12,3 +12,11 @@ class RdvForm(ModelForm):
         user = kwargs.pop('user')
         super(RdvForm, self).__init__(*args, **kwargs)
         self.fields['match'].queryset = Match.objects.filter(user=user)
+
+
+
+class NotesForm(ModelForm):
+    class Meta:
+        model = Match_notes
+        fields = ['notes']
+

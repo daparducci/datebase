@@ -14,7 +14,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
 <body>
-    <header class="navbar-fixed" >
+    <header class="navbar" >
         <nav>
             <div class="nav-wrapper white">
                 <a href="{% url 'matches_index' %}" class="left brand-logo" style="margin: 0 10px"><img height="30vh" src="https://i.imgur.com/dQnQmno.png" alt="datebase logo"></a> 
@@ -57,6 +57,10 @@
 </body>
 <script>
     var elems = document.getElementById('mobile-links');
-    M.Sidenav.init(elems);
+    M.Sidenav.init(elems, {
+        edge: 'right',
+        closeOnClick: true,
+    });
+
 </script>
 </html>
