@@ -3,7 +3,7 @@ from django.urls import reverse
 from django import forms
 from django.db import models
 from .models import Match, Rdv, Match_photo, User_photo, Profile
-from .forms import RdvForm
+from .forms import RdvForm, NotesForm
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.models import User
@@ -89,9 +89,25 @@ class MatchCreate(LoginRequiredMixin, CreateView):
     # Let the CreateView do its job as usual
     return super().form_valid(form)
 
+@login_required
+def match_detail(request, pk):
+  match = Match.objects.get(id=pk)
+  notes_form = NotesForm()
+  return render(request, 'matches/match_detail.html', {'match': match, 'notes_form': notes_form, 'pk': pk
+  })
+  
+@login_required
+def add_note(request, pk):
+  form = NotesForm(request.POST)
+  if form.is_valid():
+    new_note = form.save(commit=False)
+    new_note.pk = pk
+    new_note.save()
+  return render(request, 'matches/match_detail.html', pk=pk)
 
 class MatchDetail(LoginRequiredMixin, DetailView):
   model = Match
+
 
 class MatchDelete(LoginRequiredMixin, DeleteView):
   model = Match
