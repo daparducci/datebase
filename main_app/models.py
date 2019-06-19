@@ -99,8 +99,8 @@ class Match(models.Model):
     ghost = models.BooleanField(null = True)
 
     def get_absolute_url(self):
-        return reverse('match_detail', kwargs={'pk': self.id})
-        
+        return reverse('detail', kwargs={'match_id': self.id})
+
     def __str__(self):
         return self.name
 
