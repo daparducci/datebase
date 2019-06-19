@@ -96,8 +96,9 @@ class MatchDelete(LoginRequiredMixin, DeleteView):
 
 class MatchUpdate(LoginRequiredMixin, UpdateView):
   model = Match
-  fields = ['name', 'email', 'phone', 'age', 'location', 'meet', 'interests', 'zodiac']
+  fields = ['name', 'email', 'phone_number', 'age', 'location', 'meet', 'interests', 'zodiac']
 
+# TODO
 class RdvCreate(LoginRequiredMixin, CreateView):
   model = Rdv
   fields = ['match', 'date', 'what', 'where']
@@ -152,3 +153,7 @@ class ProfileCreate (LoginRequiredMixin, CreateView):
       return f'/profile/{self.request.user.id}'
   # def get_success_url(self):
   #   return (f'profile/{request.user.id}')
+
+class ProfileUpdate(LoginRequiredMixin, UpdateView):
+  model = Profile
+  fields = ['first_name', 'last_name', 'age', 'gender', 'zodiac', 'apps_used', 'relationship_goal']
