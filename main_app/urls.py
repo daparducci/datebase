@@ -7,7 +7,7 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/signup', views.signup, name="signup"),
-    path('profile/<int:pk>', views.UserDetail.as_view(), name="profile"),
+    path('profile/<int:pk>', views.user_detail, name="profile"),
     path('profile/create', views.ProfileCreate.as_view(), name="profile_create"),
     # MATCHES
     path('matches/', views.matches_index, name='matches_index'),
