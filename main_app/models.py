@@ -104,6 +104,14 @@ class Match(models.Model):
     def __str__(self):
         return self.name
 
+class Match_notes(models.Model):
+    match = models.ForeignKey(Match, on_delete=models.CASCADE)
+    notes = models.TextField(blank=True)
+    created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+
+    def __str__(self):
+        return self.created
+
 class Rdv(models.Model):
     match = models.ForeignKey(Match, on_delete=models.CASCADE)
     date = models.DateField()
