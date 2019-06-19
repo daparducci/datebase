@@ -3,6 +3,7 @@ from django.urls import reverse
 from django import forms
 from django.db import models
 from .models import Match, Rdv, Match_photo, User_photo, Profile
+from .forms import RdvForm
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.models import User
@@ -102,13 +103,16 @@ class MatchUpdate(LoginRequiredMixin, UpdateView):
 
 # TODO
 class RdvCreate(LoginRequiredMixin, CreateView):
-  model = Rdv
-  fields = ['match', 'date', 'rdv_time', 'what', 'where']
+  template_name = 'main_app/rdv_form.html'
+  form_class = RdvForm
   success_url = '/rdvs/'
-  rdv_time = forms.TimeField(input_formats=['%I:%M %p'],      widget=forms.TimeInput)
+  def get_form_kwargs(self):
+    kwargs = super(RdvCreate, self).get_form_kwargs()
+    kwargs['user'] = self.request.user
+    return kwargs
 
-  def get_user(self):
-    return self.request.user
+  # def get_user(self):
+  #   return self.request.user
   
   # match = Match.objects.filter(user=self.request.user)
 
