@@ -7,7 +7,9 @@
         <div class="col s4 m4 l4 center-align">
                 <div class="card-image center-align">
                     {% for photo in user.user_photo_set.all %}
-                        <img class="responsive-img card-panel" src="{{photo.url}}">
+                        {% if forloop.counter == 1 %}
+                            <img class="responsive-img card-panel" src="{{photo.url}}">
+                        {% endif %}
                     {% empty %}
                         <i class="material-icons" style="font-size: 12rem" >account_circle</i>
                     {% endfor %}
