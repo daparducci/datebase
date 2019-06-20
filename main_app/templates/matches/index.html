@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>My Matches</h1>
+
 <div class="row">
     {% if matches %}
     {% for match in matches %}
@@ -21,8 +21,15 @@
         </div>
     </div>
     {% endfor %}
-    {% endif %}
+    {% else %}
 </div>
+
+<div class="center-align">
+    <h4 class="red-text darken-4 center-align">no matches </h4>
+    <a class="waves-effect btn-flat red 
+    white-text" href="{% url 'matches_create' %}">Add a Match</a></li>
+</div>
+{% endif %}
 
 
 {% endblock %}
