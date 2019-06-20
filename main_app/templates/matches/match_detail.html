@@ -11,7 +11,7 @@
                         <img class="responsive-img" src="{{photo.url}}">
                     {% endif %}
                 {% empty %}
-                    <i class="material-icons" style="font-size: 12rem">account_circle</i>
+                    <i class="material-icons" style="font-size: 25vh">account_circle</i>
                 {% endfor %}
             {% else %}
                 <img src="https://i.imgur.com/ZbOJKby.png">
@@ -31,18 +31,18 @@
     <div class="col col s8 offset-s2 m6 l8">
         <div class="card-content center-align">
             <h2 class="red-text">{{ match.name }}</h2>
-            <h4 class="grey-text">{{ match.phone }}</h4>
-            <h6 class="grey-text darken-4">where we met: {{ match.meet }}</h6>
+            <h4>{{ match.phone }}</h4>
+            <h5>where we met: {{ match.meet }}</h5>
         </div><br>
         <div class="card-action center-align">
             <a class="waves-effect btn-flat red white-text" href="{% url 'match_update' match.id %}" padding="2px">Edit Match
                 Details</a>
-            {% if not match.ghost %}
-            <a class="waves-effect btn-flat red white-text" href="{% url 'match_ghost' match.id %}">Ghosted</a>
-            {% else %}
-            <a class="waves-effect btn-flat red white-text" href="{% url 'match_ghost' match.id %}">Unghost</a>
-            {% endif %}
             <a class="waves-effect btn-flat red white-text" href="{% url 'match_delete' match.id %}">Delete Match</a>
+                {% if not match.ghost %}
+                <a class="waves-effect btn-flat red white-text" href="{% url 'match_ghost' match.id %}">Ghosted</a>
+                {% else %}
+                <a class="waves-effect btn-flat red white-text" href="{% url 'match_ghost' match.id %}">Unghost</a>
+                {% endif %}
         </div>
     </div>
 </div>
