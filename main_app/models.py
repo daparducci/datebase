@@ -96,7 +96,7 @@ class Match(models.Model):
         blank = True
     )
     see_again = models.BooleanField(null = True)
-    ghost = models.BooleanField(null = True)
+    ghost = models.BooleanField(default=False)
 
     def get_absolute_url(self):
         return reverse('detail', kwargs={'match_id': self.id})
