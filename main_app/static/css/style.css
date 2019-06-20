@@ -3,12 +3,13 @@ body {
     min-height: 100vh;
     flex-direction: column;
     font-family: 'Source Sans Pro', sans-serif;
-    text-transform: uppercase;
+    
 }
 
 main.container {
     margin: 20px auto;
     flex: 1 0 auto;
+    text-transform: uppercase;
 }
 
 .profile {

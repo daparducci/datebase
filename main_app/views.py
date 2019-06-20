@@ -273,7 +273,7 @@ def ghost(request, pk):
 # Yelp API below
 def yelp(request, pk):
   # Trigger yelp
-  api_key = hidden.api_key
+  api_key = 'RF_dcHA_yUIN-q03f0jTzj6LK_LYZ2wvhGYDuFTcpVepnKdrH2w7fYY76ouUVHz6n47qBMwyPTy79oMCFOUcNW4KhHvGNd_c4v0ZWv0sO2mBxqlkfYZGGI35yRIMXXYx'
   headers = {'Authorization': 'Bearer %s' % api_key}
   url = 'https://api.yelp.com/v3/businesses/search'
   rdv = Rdv.objects.get(pk=pk)
