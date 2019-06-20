@@ -28,7 +28,7 @@
                 </tr>
                 <tr>
                     <th>Time</th>
-                    <td>{{rdv.time}}</td>
+                    <td>{{rdv.rdv_time}}</td>
                 </tr>
                 <tr>
                     <th>Where</th>
@@ -38,6 +38,12 @@
                     <th>Activity</th>
                     <td>{{rdv.what}}</td>
                 </tr>
+                {% if rdv.past_date %}
+                    <tr>
+                        <th>Rating</th>
+                        <td>{{rdv.rating}}</td>
+                    </tr>
+                {% endif %}
                 <tr>
                     <th>Notes</th>
                     <td>{{rdv.notes}}</td>
@@ -45,9 +51,6 @@
             </tbody>
         </table>
     </div>
-</div>
-<div class="row center-align">
-    <a class="waves-effect btn-flat red white-text" href="">Cancel Rendez-Vous</a>
 </div>
 <div class="row center-align">
     <a class="waves-effect btn-flat red white-text" href="{% url 'add_calendar' rdv.id %}">Send to Google Calendar</a>
