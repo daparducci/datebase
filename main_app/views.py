@@ -22,6 +22,10 @@ from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from django.utils import timezone
+# Yelp API
+import requests
+import json
+import hidden
 
 S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
 BUCKET = 'datebase'
@@ -264,3 +268,36 @@ def ghost(request, pk):
   match.save()
   # print(match.ghost)
   return redirect('match_detail', pk=pk)
+
+
+# Yelp API below
+def yelp(request, pk):
+  # Trigger yelp
+  api_key = hidden.api_key
+  headers = {'Authorization': 'Bearer %s' % api_key}
+  url = 'https://api.yelp.com/v3/businesses/search'
+  rdv = Rdv.objects.get(pk=pk)
+  params = {
+    'term': f'{rdv.what}',
+    'location': f'{rdv.where}',
+    'limit': 5
+  }
+  req = requests.get(url, params=params, headers=headers)
+  parsed = json.loads(req.text)
+  businesses = parsed["businesses"]
+
+  yelp_search = []
+
+  for business in businesses:
+    business = {
+      'name': business['name'],
+      'rating': business['rating'],
+      'address': business['location']['address1'],
+      'phone': business['phone'],
+      'url': business['url']
+    }
+    yelp_search.append(business)
+
+  return render(request, 'main_app/rdv_detail.html', {'rdv': rdv, 'yelp': yelp_search})
+
+

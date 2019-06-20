@@ -31,4 +31,6 @@ urlpatterns = [
     path('calendar/<int:pk>/', views.cal, name='add_calendar'),
     #  Ghost
     path('ghost/<int:pk>/', views.ghost, name='match_ghost'),
+    # Add Yelp link
+    path('yelp/<int:pk>/', views.yelp, name='yelp_search'),
 ]

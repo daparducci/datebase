@@ -48,10 +48,23 @@
                     <th>Notes</th>
                     <td>{{rdv.notes}}</td>
                 </tr>
+                {% if rdv.where and rdv.when %}
+                <tr>
+                    <th>Yelp Suggestions</th>
+                </tr>
+                {% endif %}
+                {% for business in yelp %}
+                <tr>
+                    <td>{{business.name}}</td>
+                    <td>{{business.rating}}</td>
+                    <td>{{business.address}}</td>
+                    <td>{{business.phone}}</td>
+                    <td><a href='{{business.url}}' target='_blank'>Click here</a></td>
+                </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
-</div>
 <div class="row center-align">
     <a class="waves-effect btn-flat red white-text" href="{% url 'add_calendar' rdv.id %}">Send to Google Calendar</a>
 </div>
@@ -61,4 +74,15 @@
 <div class="row center-align">
     <a class="waves-effect btn-flat red white-text" href="{% url 'rdv_delete' rdv.id %}">Delete Rendez-Vous</a>
 </div>
+{% if not yelp %}
+{% if rdv.what and rdv.where %}
+<div class="row center-align">
+    <a class="waves-effect btn-flat red white-text" href="{% url 'yelp_search' rdv.id %}">Search Yelp for Ideas</a>
+</div>
+{% else %}
+<div class="row center-align">
+    <a class="waves-effect btn-flat red white-text" href="{% url 'rdv_update' rdv.id %}">Add 'Where' and 'Activity' to Search Yelp for Suggestions</a>
+</div>
+{% endif %}
+{% endif %}
 {% endblock %}
