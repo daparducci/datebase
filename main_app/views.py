@@ -46,8 +46,7 @@ def add_match_photo(request, match_id):
   print(match_id)
   photo_file = request.FILES.get('photo-file', None)
   if photo_file:
-    session = boto3.Session(profile_name="datebase-app")
-    s3 = session.client('s3')
+    s3 = boto3.client('s3')
     key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
     try:
       s3.upload_fileobj(photo_file, BUCKET, key)
@@ -62,8 +61,7 @@ def add_match_photo(request, match_id):
 def add_profile_photo(request, profile_id):
   photo_file = request.FILES.get('photo-file', None)
   if photo_file:
-    session = boto3.Session(profile_name="datebase-app")
-    s3 = session.client('s3')
+    s3 = boto3.client('s3')
     key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
     try:
       s3.upload_fileobj(photo_file, BUCKET, key)
