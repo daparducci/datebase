@@ -139,7 +139,14 @@
                     <tr>
                       <td>{{note.created}}</td>
                       <td>{{note.notes}}</td>
-                      <td><a class="waves-effect btn-flat red white-text" href=""><i class="material-icons">delete</i></a></td>
+                      <td>
+                        <form action="{% url 'delete_note' pk note.id %}" method="POST">
+                            {% csrf_token %}
+                            <input class="waves-effect btn-flat red 
+                            white-text" type="submit">
+                            <!-- <i class="material-icons">delete</i> -->
+                        </form>  
+                        </td>
 
                     </tr>
                     {% empty %}
