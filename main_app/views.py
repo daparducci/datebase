@@ -25,7 +25,6 @@ from django.utils import timezone
 # Yelp API
 import requests
 import json
-import hidden
 
 S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
 BUCKET = 'datebase'
