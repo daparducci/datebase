@@ -114,8 +114,8 @@ class Match_notes(models.Model):
 class Rdv(models.Model):
     match = models.ForeignKey(Match, on_delete=models.CASCADE)
     date = models.DateField()
-    rdv_time = models.TimeField(blank=True, null=True)
-    what = models.TextField(blank=True)
+    rdv_time = models.TimeField('Time of Date', blank=True, null=True)
+    what = models.TextField('Activity', blank=True)
     where = models.TextField(blank=True)
     rating = models.CharField(
         max_length=100,
