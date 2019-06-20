@@ -26,10 +26,10 @@
         <div class="card-content center-align">
             <h2 class="red-text">{{ match.name }}</h2>
             <h4 class="grey-text">{{ match.phone }}</h4>
-            <h4 class="grey-text darken-4">we met at ... {{ match.meet }}</h4>
+            <h6 class="grey-text darken-4">where we met: {{ match.meet }}</h6>
         </div><br>
         <div class="card-action center-align">
-            <a class="waves-effect btn-flat red white-text" href="{% url 'match_update' match.id %}">Edit Match
+            <a class="waves-effect btn-flat red white-text" href="{% url 'match_update' match.id %}" padding="2px">Edit Match
                 Details</a>
             <a class="waves-effect btn-flat red white-text" href="">Ghost</a>
             <a class="waves-effect btn-flat red white-text" href="{% url 'match_delete' match.id %}">Delete Match</a>
@@ -75,7 +75,7 @@
                         <td>{{ match.email }}</td>
                     </tr>
                     <tr>
-                        <th>Location</th>
+                        <th>Match's Location</th>
                         <td>{{ match.location }}</td>
                     </tr>
                     <tr>
@@ -128,10 +128,10 @@
                         <th>Notes</th>
                     </tr>
                     <tr>
-                        <form action="{% url 'add_note' pk %}" method="post">
+                        <form action="{% url 'add_note' pk %}" method="POST">
                                 {% csrf_token %}
                                 {{ notes_form.as_p }}
-                                <input type="submit" class="waves-effect btn-flat red white-text" value="Add Note">
+                                <input type="submit" class="btn-flat red" value="Add Note">
                                 
                         </form>
                     </tr>
@@ -143,14 +143,14 @@
                         <form action="{% url 'delete_note' pk note.id %}" method="POST">
                             {% csrf_token %}
                             <input class="waves-effect btn-flat red 
-                            white-text" type="submit">
+                            white-text" type="submit" value="Delete Note">
                             <!-- <i class="material-icons">delete</i> -->
                         </form>  
                         </td>
 
                     </tr>
                     {% empty %}
-                    <h1>Test</h1>
+                    <h5>No Notes Yet</h5>
                   {% endfor %}
                 </tbody>
             </table>

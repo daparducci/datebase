@@ -13,6 +13,7 @@
         <table>
             {{ form.as_table }}
         </table>
+        <input type="hidden" name="match_id" value="{{ object.id }}">
         <input type="submit" value="Add Match" class="waves-effect btn-flat red white-text">
     </form>
 
