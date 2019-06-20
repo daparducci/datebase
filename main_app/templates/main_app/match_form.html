@@ -3,9 +3,9 @@
 {% block content %}
 
 {% if object %}
-    <h1>Edit <span class="teal-text">{{object.name}}</span></h1>
+    <h1 class="center-align">Edit <span class="red-text">{{object.name}}</span></h1>
 {% else %}
-    <h1>Add a Match</h1>
+    <h1 class="center-align">Add a Match</h1>
 {% endif %}
 
     <form action="" method="post">
@@ -13,7 +13,7 @@
         <table>
             {{ form.as_table }}
         </table>
-        <input type="submit" value="Submit" class="btn">
+        <input type="submit" value="Add Match" class="waves-effect btn-flat red white-text">
     </form>
 
 <script>
