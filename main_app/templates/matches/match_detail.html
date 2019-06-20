@@ -22,7 +22,7 @@
             <input type="submit" class="waves-effect btn-flat red white-text" value="Upload Photo">
         </form>
     </div>
-    <div class="col s12 m6 l8">
+    <div class="col col s8 offset-s2 m6 l8">
         <div class="card-content center-align">
             <h2 class="red-text">{{ match.name }}</h2>
             <h4 class="grey-text">{{ match.phone }}</h4>
@@ -38,7 +38,7 @@
 </div>
 
 </div>
-<div class="col s12 m12 l6">
+<div class="col col s8 offset-s2 m12 l6">
     <div class="card">
         <div class="card-content center-align">
             <span class="card-title red-text text-darken 4">UPCOMING RENDEZ-VOUS</span>
@@ -95,7 +95,7 @@
         </div>
     </div>
 </div>
-<div class="col s12 m12 l6">
+<div class="col col s8 offset-s2 m12 l6">
     <div class="card">
         <div class="card-content center-align">
             <span class="card-title red-text text-darken 4">PAST RENDEZ-VOUS</span>
@@ -131,7 +131,7 @@
                         <form action="{% url 'add_note' pk %}" method="post">
                                 {% csrf_token %}
                                 {{ notes_form.as_p }}
-                                <input type="submit" class="btn" value="Add Note">
+                                <input type="submit" class="waves-effect btn-flat red white-text" value="Add Note">
                                 
                         </form>
                     </tr>

@@ -22,7 +22,6 @@ from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from django.utils import timezone
-from tz_detect.templatetags.tz_detect import tz_detect
 
 S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
 BUCKET = 'datebase'
