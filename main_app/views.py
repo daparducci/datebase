@@ -46,7 +46,7 @@ def add_match_photo(request, match_id):
   print(match_id)
   photo_file = request.FILES.get('photo-file', None)
   if photo_file:
-    session = boto3.Session(profile_name="datebase")
+    session = boto3.Session(profile_name="datebase-app")
     s3 = session.client('s3')
     key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
     try:
@@ -62,7 +62,7 @@ def add_match_photo(request, match_id):
 def add_profile_photo(request, profile_id):
   photo_file = request.FILES.get('photo-file', None)
   if photo_file:
-    session = boto3.Session(profile_name="datebase")
+    session = boto3.Session(profile_name="datebase-app")
     s3 = session.client('s3')
     key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
     try:
@@ -131,7 +131,7 @@ class MatchUpdate(LoginRequiredMixin, UpdateView):
   model = Match
   fields = ['name', 'email', 'phone_number', 'age', 'location', 'meet', 'interests', 'zodiac']
   success_url ='/matches/'
-  
+
 # TODO
 class RdvCreate(LoginRequiredMixin, CreateView):
   template_name = 'main_app/rdv_form.html'
