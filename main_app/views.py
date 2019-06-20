@@ -163,7 +163,7 @@ class RdvDetail(LoginRequiredMixin, DetailView):
 
 class RdvUpdate(LoginRequiredMixin, UpdateView):
   model = Rdv
-  fields = ['match', 'date', 'time', 'what', 'where', 'rating']
+  fields = ['match', 'date', 'rdv_time', 'what', 'where', 'rating']
 
 class RdvDelete(LoginRequiredMixin, DeleteView):
   model = Rdv
@@ -225,10 +225,12 @@ def cal(request, pk):
 
   service = build('calendar', 'v3', credentials=creds)
 
-  # now = datetime.datetime.utcnow().isoformat() + 'Z' # 'Z' indicates UTC time
   # Environment setup above, add event below
-  
   rdv = Rdv.objects.get(pk=pk)
+
+  if not rdv.rdv_time:
+    rdv.rdv_time = '12:00:00'
+
   event = {
       'summary': f'Meet with {rdv.match.name}',
       'location': f'{rdv.where}',
