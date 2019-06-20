@@ -46,7 +46,7 @@ def add_match_photo(request, match_id):
   print(match_id)
   photo_file = request.FILES.get('photo-file', None)
   if photo_file:
-    session = boto3.Session(profile_name="datebase")
+    session = boto3.Session(profile_name="datebase-app")
     s3 = session.client('s3')
     key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
     try:
@@ -62,7 +62,7 @@ def add_match_photo(request, match_id):
 def add_profile_photo(request, profile_id):
   photo_file = request.FILES.get('photo-file', None)
   if photo_file:
-    session = boto3.Session(profile_name="datebase")
+    session = boto3.Session(profile_name="datebase-app")
     s3 = session.client('s3')
     key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
     try:
@@ -171,7 +171,7 @@ class RdvDetail(LoginRequiredMixin, DetailView):
 
 class RdvUpdate(LoginRequiredMixin, UpdateView):
   model = Rdv
-  fields = ['match', 'date', 'rdv_time', 'what', 'where', 'rating'] #check if 'time' is 'rdv_time'
+  fields = ['match', 'date', 'rdv_time', 'what', 'where', 'rating']
 
 class RdvDelete(LoginRequiredMixin, DeleteView):
   model = Rdv
@@ -233,10 +233,12 @@ def cal(request, pk):
 
   service = build('calendar', 'v3', credentials=creds)
 
-  # now = datetime.datetime.utcnow().isoformat() + 'Z' # 'Z' indicates UTC time
   # Environment setup above, add event below
-  
   rdv = Rdv.objects.get(pk=pk)
+
+  if not rdv.rdv_time:
+    rdv.rdv_time = '12:00:00'
+
   event = {
       'summary': f'Meet with {rdv.match.name}',
       'location': f'{rdv.where}',

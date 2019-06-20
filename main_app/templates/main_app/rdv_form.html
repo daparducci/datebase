@@ -23,7 +23,7 @@ var dateEl = document.getElementById('id_date');
   M.Datepicker.init(dateEl, {
     format: 'yyyy-mm-dd',
     defaultDate: new Date(),
-    setDefaultDate: true,
+    setDefaultDate: false,
     autoClose: true
   });
 
@@ -37,8 +37,11 @@ var timeEl = document.getElementById('id_rdv_time');
     console.log(this);
   }
 
-    var selectEl = document.getElementById('id_match');
-    M.FormSelect.init(selectEl);
+var selectEl = document.getElementById('id_match');
+M.FormSelect.init(selectEl);
+
+var rateEl = document.getElementById('id_rating');
+M.FormSelect.init(rateEl)
 </script>
 
 {% endblock %}
