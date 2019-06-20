@@ -53,6 +53,9 @@
     <a class="btn red text-white" href="">Cancel Rendez-Vous</a>
 </div>
 <div class="row center-align">
+    <a class="btn red text-white" href="{% url 'add_calendar' rdv.id %}">Send to Google Calendar</a>
+</div>
+<div class="row center-align">
         <a class="btn red text-white" href="{% url 'rdv_update' rdv.id %}">Edit Match Details</a>
 </div>
 <div class="row center-align">
