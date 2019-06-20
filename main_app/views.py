@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django import forms
 from django.db import models
-from .models import Match, Rdv, Match_photo, User_photo, Profile
+from .models import Match, Rdv, Match_photo, User_photo, Profile, Match_notes
 from .forms import RdvForm, NotesForm
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic import ListView, DetailView
@@ -114,6 +114,11 @@ def add_note(request, pk):
     new_note.save()
   return redirect('match_detail', pk=pk)
 
+@login_required
+def delete_note(request, note_id, pk):
+  Match_notes.objects.filter(id=note_id).delete()
+  return redirect('match_detail', pk=pk)
+
 class MatchDetail(LoginRequiredMixin, DetailView):
   model = Match
 
@@ -125,6 +130,7 @@ class MatchDelete(LoginRequiredMixin, DeleteView):
 class MatchUpdate(LoginRequiredMixin, UpdateView):
   model = Match
   fields = ['name', 'email', 'phone_number', 'age', 'location', 'meet', 'interests', 'zodiac']
+  success_url ='/matches/'
 
 # TODO
 class RdvCreate(LoginRequiredMixin, CreateView):
