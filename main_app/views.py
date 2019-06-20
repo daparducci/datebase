@@ -131,7 +131,7 @@ class MatchUpdate(LoginRequiredMixin, UpdateView):
   model = Match
   fields = ['name', 'email', 'phone_number', 'age', 'location', 'meet', 'interests', 'zodiac']
   success_url ='/matches/'
-
+  
 # TODO
 class RdvCreate(LoginRequiredMixin, CreateView):
   template_name = 'main_app/rdv_form.html'
