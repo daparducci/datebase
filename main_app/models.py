@@ -14,7 +14,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=100, blank=True)
     last_name = models.CharField(max_length=100, blank=True)
-    age = models.IntegerField(null=True)
+    age = models.IntegerField(null=True, blank=True)
     gender = models.CharField(
         max_length=100,
         choices=(
@@ -75,8 +75,8 @@ class Match(models.Model):
     )
     phone_number = PhoneNumberField(null=True, blank=True)
     age = models.IntegerField(null= True, blank=True)
-    location = models.TextField(blank = True)
-    meet = models.TextField()
+    location = models.TextField("Match's Location", blank = True)
+    meet = models.TextField('Where We Met')
     interests = models.TextField(blank = True)
     attraction = models.CharField(
         max_length=100,
@@ -114,8 +114,8 @@ class Match_notes(models.Model):
 class Rdv(models.Model):
     match = models.ForeignKey(Match, on_delete=models.CASCADE)
     date = models.DateField()
-    rdv_time = models.TimeField(blank=True, null=True)
-    what = models.TextField(blank=True)
+    rdv_time = models.TimeField('Time of Date', blank=True, null=True)
+    what = models.TextField('Activity', blank=True)
     where = models.TextField(blank=True)
     rating = models.CharField(
         max_length=100,

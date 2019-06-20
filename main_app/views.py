@@ -107,6 +107,7 @@ def match_detail(request, pk):
   
 @login_required
 def add_note(request, pk):
+  print('add note reached')
   form = NotesForm(request.POST)
   if form.is_valid():
     new_note = form.save(commit=False)
@@ -119,8 +120,8 @@ def delete_note(request, note_id, pk):
   Match_notes.objects.filter(id=note_id).delete()
   return redirect('match_detail', pk=pk)
 
-class MatchDetail(LoginRequiredMixin, DetailView):
-  model = Match
+# class MatchDetail(LoginRequiredMixin, DetailView):
+#   model = Match
 
 
 class MatchDelete(LoginRequiredMixin, DeleteView):
@@ -130,7 +131,13 @@ class MatchDelete(LoginRequiredMixin, DeleteView):
 class MatchUpdate(LoginRequiredMixin, UpdateView):
   model = Match
   fields = ['name', 'email', 'phone_number', 'age', 'location', 'meet', 'interests', 'zodiac']
-  success_url ='/matches/'
+  # success_url ='/matches/'
+
+  def get_success_url(self):
+      # print('Self: ', self.request)
+      print('ID: ', self.request.POST['match_id'])
+      # return reverse('profile', kwargs={'pk': request.user.id})
+      return f'/matches/{self.request.POST["match_id"]}'
 
 # TODO
 class RdvCreate(LoginRequiredMixin, CreateView):

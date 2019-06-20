@@ -47,3 +47,7 @@ span {
 p {
     font-size: calc(13px + 0.5vw);
 }
+
+.btn-flat {
+    margin: 1vh;
+}
