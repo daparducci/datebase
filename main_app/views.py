@@ -101,6 +101,7 @@ class MatchCreate(LoginRequiredMixin, CreateView):
 @login_required
 def match_detail(request, pk):
   match = Match.objects.get(id=pk)
+  print(match.ghost)
   notes_form = NotesForm()
   return render(request, 'matches/match_detail.html', {'match': match, 'notes_form': notes_form, 'pk': pk
   })
@@ -170,7 +171,7 @@ class RdvDetail(LoginRequiredMixin, DetailView):
 
 class RdvUpdate(LoginRequiredMixin, UpdateView):
   model = Rdv
-  fields = ['match', 'date', 'time', 'what', 'where', 'rating']
+  fields = ['match', 'date', 'rdv_time', 'what', 'where', 'rating'] #check if 'time' is 'rdv_time'
 
 class RdvDelete(LoginRequiredMixin, DeleteView):
   model = Rdv
@@ -254,3 +255,12 @@ def cal(request, pk):
   return redirect('rdv_detail', pk=pk)
   # print ('Event created: %s' % (event.get('htmlLink')))
 
+def ghost(request, pk):
+  match = Match.objects.get(pk=pk)
+  if not match.ghost:
+    match.ghost = True
+  else :
+    match.ghost = False
+  match.save()
+  # print(match.ghost)
+  return redirect('match_detail', pk=pk)
