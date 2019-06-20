@@ -5,17 +5,17 @@
     <div class="col s6 offset-s3 m6 l4">
         <div class="card">
             <div class="card-image center-align">
-            {% for photo in match.match_photo_set.all %}
-                {% if not match.ghost %}
+            {% if not match.ghost %}
+                {% for photo in match.match_photo_set.all %}
                     {% if forloop.counter == 1 %}
                         <img class="responsive-img" src="{{photo.url}}">
                     {% endif %}
-                {% else %}
-                <i class="material-icons" style="font-size: 12rem">account_circle</i>
-                {% endif %}
                 {% empty %}
-                <i class="material-icons" style="font-size: 12rem">account_circle</i>
+                    <i class="material-icons" style="font-size: 12rem">account_circle</i>
                 {% endfor %}
+            {% else %}
+                <img src="https://i.imgur.com/ZbOJKby.png">
+            {% endif %}
             </div>
         </div>
         {% if not match.ghost %}
@@ -38,7 +38,7 @@
             <a class="waves-effect btn-flat red white-text" href="{% url 'match_update' match.id %}" padding="2px">Edit Match
                 Details</a>
             {% if not match.ghost %}
-            <a class="waves-effect btn-flat red white-text" href="{% url 'match_ghost' match.id %}">Ghost</a>
+            <a class="waves-effect btn-flat red white-text" href="{% url 'match_ghost' match.id %}">Ghosted</a>
             {% else %}
             <a class="waves-effect btn-flat red white-text" href="{% url 'match_ghost' match.id %}">Unghost</a>
             {% endif %}
@@ -132,36 +132,32 @@
     </div>
     <div class="card">
         <div class="card-content center-align">
+            <h4>Notes</h4>
             <table class="striped">
                 <tbody>
-                    <tr>
-                        <th>Notes</th>
-                    </tr>
-                    <tr>
-                        <form action="{% url 'add_note' pk %}" method="POST">
-                                {% csrf_token %}
-                                {{ notes_form.as_p }}
-                                <input type="submit" class="btn-flat red" value="Add Note">
-                                
-                        </form>
-                    </tr>
                     {% for note in match.match_notes_set.all %}
                     <tr>
-                      <td>{{note.created}}</td>
-                      <td>{{note.notes}}</td>
-                      <td>
-                        <form action="{% url 'delete_note' pk note.id %}" method="POST">
-                            {% csrf_token %}
-                            <input class="waves-effect btn-flat red 
-                            white-text" type="submit" value="Delete Note">
-                            <!-- <i class="material-icons">delete</i> -->
-                        </form>  
+                        <td>{{note.created}}</td>
+                        <td>{{note.notes}}</td>
+                        <td>
+                            <form action="{% url 'delete_note' pk note.id %}" method="POST">
+                                {% csrf_token %}
+                                <input class="waves-effect btn-flat red 
+                                white-text" type="submit" value="Delete Note">
+                                <!-- <i class="material-icons">delete</i> -->
+                            </form>  
                         </td>
-
                     </tr>
                     {% empty %}
-                    <h5>No Notes Yet</h5>
-                  {% endfor %}
+                        <h5>No Notes Yet</h5>
+                    {% endfor %}
+                    <tr>
+                        <form action="{% url 'add_note' pk %}" method="POST">
+                            {% csrf_token %}
+                            {{ notes_form.as_p }}
+                            <input type="submit" class="btn-flat red" value="Add Note"> 
+                        </form>
+                    </tr>
                 </tbody>
             </table>
         </div>
