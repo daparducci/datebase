@@ -142,7 +142,6 @@ class MatchUpdate(LoginRequiredMixin, UpdateView):
       # return reverse('profile', kwargs={'pk': request.user.id})
       return f'/matches/{self.request.POST["match_id"]}'
 
-# TODO
 class RdvCreate(LoginRequiredMixin, CreateView):
   template_name = 'main_app/rdv_form.html'
   form_class = RdvForm
