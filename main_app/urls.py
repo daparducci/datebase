@@ -26,5 +26,7 @@ urlpatterns = [
 
     path('matches/<int:match_id>/add_match_photo/', views.add_match_photo, name="add_match_photo"),
     path('profile/<int:profile_id>/add_profile_photo/', views.add_profile_photo, name="add_profile_photo"),
+    # Add calendar link
+    path('calendar/<int:pk>/', views.cal, name='add_calendar')
 
 ]
