@@ -18,7 +18,7 @@
                     {% csrf_token%}
                     <input type="file" name="photo-file">
                     <br><br>
-                    <input type="submit" class="waves-effect btn-flat red white-text" value="Upload Photo">
+                    <input type="submit" class="btn-flat red white-text" value="Upload Photo">
                 </form>
                 <a class="waves-effect btn-flat red white-text" href="{% url 'profile_update' user.profile.id %}">Edit Profile</a>
                 <a class="waves-effect btn-flat red white-text" href="{% url 'profile_delete' user.profile.id %}">Delete Profile</a>
@@ -69,8 +69,9 @@
     </div>
 
 {% else %}
+
     <div class="center-align">
-        <a class="btn" href="{% url 'profile_create'%}">Create Profile</a>
+        <a class="btn-flat red white-text" href="{% url 'profile_create'%}">Create Profile</a>
     </div>
 {% endif %}
 
