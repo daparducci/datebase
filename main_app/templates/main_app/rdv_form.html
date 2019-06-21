@@ -4,9 +4,9 @@
 
 
 {% if object %}
-<h1 class="center-align">Edit <span class="red-text">{{object.name}}</span></h1>
+<h4 class="center-align red-text darken-4">Edit Rendez-vous</h4>
 {% else %}
-<h1 class="center-align">Add a Rendez-vous</h1>
+<h4 class="center-align red-text darken-4">Add a Rendez-vous</h4>
 {% endif %}
 
 <form action="" method="post">
@@ -14,7 +14,11 @@
     <table>
         {{ form.as_table }}
     </table>
-    <input type="submit" value="Add Rendez-vous" class="waves-effect btn-flat red white-text">
+    {% if object %}
+      <input type="submit" value="Edit Rendez-vous" class="btn-flat red white-text">
+    {% else %}
+      <input type="submit" value="Add Rendez-vous" class="btn-flat red white-text">
+    {% endif %}
 </form>
 
 <script>

@@ -7,7 +7,8 @@ body {
 }
 
 main.container {
-    margin: 20px auto;
+    margin: 0 auto;
+    margin-top: 20px;
     flex: 1 0 auto;
     text-transform: uppercase;
 }
@@ -51,4 +52,12 @@ p {
 
 .btn-flat {
     margin: 1vh;
+}
+
+#icon {
+    width: 10vw;
+}
+
+#note-date {
+    width: 20vw;
 }
