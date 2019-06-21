@@ -5,9 +5,9 @@
 #### Description
 *With all the dating apps available today, it can be difficult to keep track of all the information about all of your matches. The datəbase solves this problem, providing users with a way to organize dating app matches! Create entries for each match, input their information, schedule new rendezvous, send rendezvous details to your Google Calendar, and search Yelp for rendezvous suggestions. Simplify your dating life with the datəbase, and never lose track of information again!* 
 
-<kbd>
+
 [![Open App](https://i.imgur.com/9oc7hXO.png)](https://drive.google.com/file/d/125bh7PeEoBoJ1UPjLvEkUVVqKkFgyr2B/view?usp=sharing)
-</kbd>
+
 
 #### Technologies Used:
 *Django, Python, PostgreSQL, AWS, Javascript, Heroku, Yelp API, Google Calendar API, Adobe XD, Adobe InDesign, Adobe Photoshop, Adobe Illustrator, HTML, CSS, Materialize, Git, GitHub*
@@ -51,6 +51,5 @@
 - Include horoscope compatibility percentages for all matches
 
 #### About
-<kbd>
+
 ![the datebase about](https://i.imgur.com/1QbykoD.png)
-</kbd>
