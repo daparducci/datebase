@@ -58,18 +58,17 @@
                     {% if not rdv.past_date %}
                     {% if request.user.id == rdv.match.user.id %}
                     <tr>
-                        <td>{{rdv.match.name}}</td>
                         <td>{{rdv.date}}</td>
-                        <td><a class="btn-floating btn-small waves-effect waves-light red"
+                        <td>{{rdv.rdv_time}}</td>
+                        <td id="icon"><a class="btn-floating btn-small waves-effect waves-light red"
                                 href="{% url 'rdv_detail' rdv.id %}"> <i class="material-icons">more_horiz</i></a></td>
                     </tr>
                     {% endif %}
                     {% endif %}
                     {% endfor %}
-                    <a class="waves-effect btn-flat red white-text" href="{% url 'rdvs_create' %}"> Add a new
-                        Rendez-Vous</a>
                 </tbody>
             </table>
+            <a class="waves-effect btn-flat red white-text" href="{% url 'rdvs_create' %}"> Add a new Rendez-Vous</a>
         </div>
     </div>
     <div class="card">
@@ -112,20 +111,24 @@
             <br>
             <table class="striped">
                 <tbody>
-                    <tr>
+                    <thead>
+                        <tr>
+                            <th>Rendez-Vous Date</th>
+                            <th>Rating</th>
+                        </tr>
+                    </thead>
                         {% for rdv in match.rdv_set.all  %}
                         {% if rdv.past_date %}
                         {% if request.user.id == rdv.match.user.id %}
                     <tr>
-                        <td>{{rdv.match.name}}</td>
                         <td>{{rdv.date}}</td>
-                        <td><a class="btn-floating btn-small waves-effect waves-light red"
+                        <td>{{rdv.rating}}</td>
+                        <td id="icon"><a class="btn-floating btn-small waves-effect waves-light red"
                                 href="{% url 'rdv_detail' rdv.id %}"> <i class="material-icons">more_horiz</i></a></td>
                     </tr>
                     {% endif %}
                     {% endif %}
                     {% endfor %}
-                    </tr>
                 </tbody>
             </table>
         </div>
@@ -137,12 +140,12 @@
                 <tbody>
                     {% for note in match.match_notes_set.all %}
                     <tr>
-                        <td>{{note.created}}</td>
+                        <td id="note-date">{{note.created}}</td>
                         <td>{{note.notes}}</td>
-                        <td>
+                        <td id="icon">
                             <form action="{% url 'delete_note' pk note.id %}" method="POST">
                                 {% csrf_token %}
-                                <input class="waves-effect btn-flat red 
+                                <input class="btn-flat red 
                                 white-text" type="submit" value="Delete Note">
                                 <!-- <i class="material-icons">delete</i> -->
                             </form>  
@@ -155,7 +158,7 @@
                         <form action="{% url 'add_note' pk %}" method="POST">
                             {% csrf_token %}
                             {{ notes_form.as_p }}
-                            <input type="submit" class="btn-flat red" value="Add Note"> 
+                            <input type="submit" class="btn-flat red white-text" value="Add Note"> 
                         </form>
                     </tr>
                 </tbody>
