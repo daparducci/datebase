@@ -20,7 +20,8 @@
                     <br><br>
                     <input type="submit" class="waves-effect btn-flat red white-text" value="Upload Photo">
                 </form>
-                <a class="waves-effect btn-flat red white-text" href="{% url 'profile_update' user.id %}">Edit Profile</a>
+                <a class="waves-effect btn-flat red white-text" href="{% url 'profile_update' user.profile.id %}">Edit Profile</a>
+                <a class="waves-effect btn-flat red white-text" href="{% url 'profile_delete' user.profile.id %}">Delete Profile</a>
         </div>
         <div class="col s8 m8 l8">
             <table class="highlight">

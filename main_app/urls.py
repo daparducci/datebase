@@ -10,6 +10,7 @@ urlpatterns = [
     path('profile/<int:pk>', views.user_detail, name="profile"),
     path('profile/create', views.ProfileCreate.as_view(), name="profile_create"),
     path('profile/<int:pk>/update/', views.ProfileUpdate.as_view(), name="profile_update"),
+    path('profile/<int:pk>/delete/', views.ProfileDelete.as_view(), name="profile_delete"),
     # MATCHES
     path('matches/', views.matches_index, name='matches_index'),
     path('matches/create', views.MatchCreate.as_view(), name="matches_create"),

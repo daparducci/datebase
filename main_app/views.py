@@ -122,10 +122,6 @@ def delete_note(request, note_id, pk):
   Match_notes.objects.filter(id=note_id).delete()
   return redirect('match_detail', pk=pk)
 
-# class MatchDetail(LoginRequiredMixin, DetailView):
-#   model = Match
-
-
 class MatchDelete(LoginRequiredMixin, DeleteView):
   model = Match
   success_url = '/matches/'
@@ -150,19 +146,6 @@ class RdvCreate(LoginRequiredMixin, CreateView):
     kwargs['user'] = self.request.user
     return kwargs
 
-  # def get_user(self):
-  #   return self.request.user
-  
-  # match = Match.objects.filter(user=self.request.user)
-
-  # match = Match.objects.exclude(id__in = get_user.matches.all().values_list('id'))
-
-  # def form_valid(self, form):
-  # # Assign the logged in user
-  #   form.instance.match = self.match.user
-  #   # Let the CreateView do its job as usual
-  #   return super().form_valid(form)
-
 class RdvList(LoginRequiredMixin, ListView):
   model = Rdv
 
@@ -180,6 +163,7 @@ class RdvDelete(LoginRequiredMixin, DeleteView):
 @login_required
 def user_detail(request, pk):
   profile = Profile.objects.filter(user=request.user)
+  print(profile)
   return render(request, 'auth/user_detail.html', {'profile': profile}, pk)
 
 
@@ -204,7 +188,12 @@ class ProfileUpdate(LoginRequiredMixin, UpdateView):
   model = Profile
   fields = ['first_name', 'last_name', 'age', 'gender', 'zodiac', 'apps_used', 'relationship_goal']
 
+  # def get_object(self):
+  #   return Profile.objects.get(pk=self.request.POST.get('pk'))
 
+class ProfileDelete(LoginRequiredMixin, DeleteView):
+  model = Profile
+  success_url= '/matches/'
 
 # Google Calendar API
 
